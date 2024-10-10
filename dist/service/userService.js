@@ -8,22 +8,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createUserService = void 0;
-const userModel_1 = __importDefault(require("../models/userModel"));
+exports.getUserByName = exports.createUserService = void 0;
+const userModel_1 = require("../models/userModel");
 const createUserService = (user) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { username, email, profile } = user;
-        const dbUser = new userModel_1.default({
+        const dbUser = new userModel_1.userModel({
             username, email, profile
         });
         yield dbUser.save();
+        return yield (0, exports.getUserByName)(username);
     }
     catch (error) {
         throw error;
     }
 });
 exports.createUserService = createUserService;
+const getUserByName = (username) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        return yield userModel_1.userModel.find({ username });
+    }
+    catch (error) {
+        throw error;
+    }
+});
+exports.getUserByName = getUserByName;

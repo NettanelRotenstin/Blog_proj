@@ -1,8 +1,8 @@
-import userModel, { IUser } from "../models/userModel"
+import  { userModel,IUser, User } from "../models/userModel"
 
  
 
-export const createUserService = async (user:IUser) => {
+export const createUserService = async (user:IUser):Promise<User|unknown> => {
     try {
         const {username,email,profile} = user
 
@@ -10,6 +10,15 @@ export const createUserService = async (user:IUser) => {
             username,email,profile
         })
         await dbUser.save()
+        return await getUserByName(username)
+    } catch (error) {
+        throw error
+    }
+}
+
+export const getUserByName = async (username:string):Promise<User|unknown> => {
+    try {
+          return await userModel.find({username})       
     } catch (error) {
         throw error
     }
