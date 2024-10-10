@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUser = exports.getUsers = exports.createUser = void 0;
 const userService_1 = require("../service/userService");
+const console_1 = require("console");
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = yield (0, userService_1.createUserService)(req.body);
@@ -19,11 +20,32 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         });
     }
     catch (error) {
+        res.json(error);
     }
 });
 exports.createUser = createUser;
-const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () { });
+const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const allUsers = yield (0, userService_1.getAllUsers)();
+        res.status(200).json({
+            allUsers
+        });
+    }
+    catch (error) {
+        res.json(error);
+    }
+});
 exports.getUsers = getUsers;
-const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () { });
+const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const user = yield (0, userService_1.getUserByName)(req.body.username);
+        res.status(200).json({
+            user
+        });
+    }
+    catch (_a) {
+        res.json(console_1.error);
+    }
+});
 exports.getUser = getUser;
 // Optionally, add DELETE and EDIT functions

@@ -16,12 +16,17 @@ export const createUserService = async (user:IUser):Promise<User|unknown> => {
     }
 }
 
-const getUserByName = async (username:string):Promise<User|unknown> => {
+export const getUserByName = async (username:string):Promise<User|unknown> => {
     try {
-          return await userModel.find({username})       
+          return await userModel.findOne({username})       
     } catch (error) {
         throw error
     }
+}
+
+
+export const getAllUsers = async():Promise<User[] | unknown>{
+    return await userModel.find({})
 }
 
 
