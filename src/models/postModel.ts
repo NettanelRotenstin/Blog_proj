@@ -8,8 +8,8 @@ export interface IComment {
 }
 
 export interface IPost extends Document {
-  title: string;
-  content: string;
+  title?: string;
+  content?: string;
   author: Types.ObjectId;
   comments: IComment[];
 }

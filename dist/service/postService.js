@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getPostById = exports.createPostService = void 0;
+exports.updatePostService = exports.getAllPosts = exports.getPostById = exports.createPostService = void 0;
 const postModel_1 = __importDefault(require("../models/postModel"));
 const userModel_1 = require("../models/userModel");
 const userService_1 = require("./userService");
@@ -24,7 +24,7 @@ const createPostService = (post) => __awaiter(void 0, void 0, void 0, function* 
             throw new Error('author not found!');
         const dbPost = new postModel_1.default({ title, content, author });
         yield dbPost.save();
-        const user = yield userModel_1.userModel.findByIdAndUpdate(author, { $push: { posts: dbPost._id } });
+        yield userModel_1.userModel.findByIdAndUpdate(author, { $push: { posts: dbPost._id } });
         return yield (0, exports.getPostById)(dbPost.id);
     }
     catch (error) {
@@ -41,3 +41,12 @@ const getPostById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getPostById = getPostById;
+const getAllPosts = () => __awaiter(void 0, void 0, void 0, function* () {
+    return yield postModel_1.default.find({});
+});
+exports.getAllPosts = getAllPosts;
+const updatePostService = (id, postToUpdate) => __awaiter(void 0, void 0, void 0, function* () {
+    yield postModel_1.default.findByIdAndUpdate(id, postToUpdate);
+    return yield (0, exports.getPostById)(id);
+});
+exports.updatePostService = updatePostService;
