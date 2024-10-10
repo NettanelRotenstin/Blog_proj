@@ -43,6 +43,11 @@ const UserSchema = new mongoose_1.Schema({
     },
     profile: {
         type: DTOProfile_1.default
+    },
+    posts: {
+        type: [mongoose_1.Types.ObjectId],
+        default: [],
+        ref: 'Post'
     }
 });
 exports.default = mongoose_1.default.model("User", UserSchema);

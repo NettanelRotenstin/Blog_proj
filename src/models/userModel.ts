@@ -26,7 +26,11 @@ const UserSchema = new Schema<IUser>({
   },
   profile: {
     type: DTOPrfl
-
+  },
+  posts:{
+    type:[Types.ObjectId],
+    default:[],
+    ref:'Post'
   }
 });
 
