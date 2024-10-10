@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUserByName = exports.createUserService = void 0;
+exports.createUserService = void 0;
 const userModel_1 = require("../models/userModel");
 const createUserService = (user) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -18,7 +18,7 @@ const createUserService = (user) => __awaiter(void 0, void 0, void 0, function* 
             username, email, profile
         });
         yield dbUser.save();
-        return yield (0, exports.getUserByName)(username);
+        return yield getUserByName(username);
     }
     catch (error) {
         throw error;
@@ -33,4 +33,3 @@ const getUserByName = (username) => __awaiter(void 0, void 0, void 0, function* 
         throw error;
     }
 });
-exports.getUserByName = getUserByName;

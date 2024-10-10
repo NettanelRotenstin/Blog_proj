@@ -10,8 +10,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUser = exports.getUsers = exports.createUser = void 0;
+const userService_1 = require("../service/userService");
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const user = yield (0, userService_1.createUserService)(req.body);
+        res.status(201).json({
+            user
+        });
     }
     catch (error) {
     }
