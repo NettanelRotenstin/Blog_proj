@@ -38,7 +38,27 @@ export const getAllPosts = async (): Promise<IPost[] | unknown> => {
 }
 
 export const updatePostService = async (id: string, postToUpdate: UpdatePostDTO): Promise<IPost | unknown> => {
-   
-      await  postModel.findByIdAndUpdate(id,postToUpdate)
-      return await getPostById(id)
+
+    await postModel.findByIdAndUpdate(id, postToUpdate)
+    
+    return await getPostById(id)
 }
+
+
+export const deletePostService = async (id: string): Promise<IPost | unknown> => {
+    try {
+        const myPost : IPost | unknown = await getPostById(id)
+        await postModel.deleteOne({_id: id})
+        await userModel.updateOne(
+            { posts: id },
+            { $pull: { posts: id } })
+        return myPost
+    } catch (err) {
+        throw err
+    }
+}
+
+
+
+
+

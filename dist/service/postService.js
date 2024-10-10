@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updatePostService = exports.getAllPosts = exports.getPostById = exports.createPostService = void 0;
+exports.deletePostService = exports.updatePostService = exports.getAllPosts = exports.getPostById = exports.createPostService = void 0;
 const postModel_1 = __importDefault(require("../models/postModel"));
 const userModel_1 = require("../models/userModel");
 const userService_1 = require("./userService");
@@ -50,3 +50,15 @@ const updatePostService = (id, postToUpdate) => __awaiter(void 0, void 0, void 0
     return yield (0, exports.getPostById)(id);
 });
 exports.updatePostService = updatePostService;
+const deletePostService = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const myPost = yield (0, exports.getPostById)(id);
+        yield postModel_1.default.deleteOne({ _id: id });
+        yield userModel_1.userModel.updateOne({ posts: id }, { $pull: { posts: id } });
+        return myPost;
+    }
+    catch (err) {
+        throw err;
+    }
+});
+exports.deletePostService = deletePostService;
