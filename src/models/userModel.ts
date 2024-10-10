@@ -12,7 +12,7 @@ export interface IUser extends Document {
   posts: Types.ObjectId[];
 }
 
-const UserSchema = new Schema<IUser>({
+const userSchema = new Schema<IUser>({
   username: {
     type: String,
     required: [true, 'username is missing!'],
@@ -34,4 +34,4 @@ const UserSchema = new Schema<IUser>({
   }
 });
 
-export default mongoose.model<IUser>("User", UserSchema);
+export default mongoose.model<IUser>("User", userSchema);

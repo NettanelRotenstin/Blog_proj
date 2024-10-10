@@ -29,7 +29,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
 const validator_1 = require("validator");
 const DTOProfile_1 = __importDefault(require("../types/DTO/DTOProfile"));
-const UserSchema = new mongoose_1.Schema({
+const userSchema = new mongoose_1.Schema({
     username: {
         type: String,
         required: [true, 'username is missing!'],
@@ -50,4 +50,4 @@ const UserSchema = new mongoose_1.Schema({
         ref: 'Post'
     }
 });
-exports.default = mongoose_1.default.model("User", UserSchema);
+exports.default = mongoose_1.default.model("User", userSchema);

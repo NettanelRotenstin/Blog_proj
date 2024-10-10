@@ -1,7 +1,13 @@
 import { Request, Response } from "express";
 import User, { IUser } from "../models/userModel";
 
-export const createUser = async (req: Request, res: Response) => {};
+export const createUser = async (req: Request, res: Response) => {
+    try {
+        
+    } catch (error) {
+        
+    }
+};
 
 export const getUsers = async (req: Request, res: Response) => {};
 
