@@ -2,11 +2,11 @@ import { Request, Response } from "express";
 import { User } from "../models/userModel";
 import { createUserService, getAllUsers, getUserByName } from "../service/userService";
 import { error } from "console";
- 
+
 
 export const createUser = async (req: Request, res: Response) => {
     try {
-        const user:User|unknown = await createUserService(req.body)
+        const user: User | unknown = await createUserService(req.body)
         res.status(201).json({
             user
         })
@@ -17,7 +17,7 @@ export const createUser = async (req: Request, res: Response) => {
 
 export const getUsers = async (req: Request, res: Response) => {
     try {
-        const allUsers:User[] | unknown = await getAllUsers()
+        const allUsers: User[] | unknown = await getAllUsers()
         res.status(200).json({
             allUsers
         })
@@ -27,13 +27,13 @@ export const getUsers = async (req: Request, res: Response) => {
 };
 
 export const getUser = async (req: Request, res: Response) => {
-    try{
-    const user:User | unknown = await getUserByName(req.body.username)
-    res.status(200).json({
-        user
-    })
+    try {
+        const user: User | unknown = await getUserByName(req.body.username)
+        res.status(200).json({
+            user
+        })
     }
-    catch{
+    catch {
         res.json(error)
     }
 };

@@ -4,6 +4,8 @@ import postRouter from "./routes/postRoutes";
 import userRouter from "./routes/userRoutes";
 import { errorHandler } from "./middleware/errorHandler";
 import connectDB from "./config/db";
+import cookieParser = require("cookie-parser");
+ 
 
 dotenv.config();
 
@@ -14,6 +16,10 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 connectDB();
+
+app.use(cookieParser())
+
+app.use('/swagger', swaggerUi.serve,swaggerUi.setup(specs));
 
 // Routes
 app.use("/api/posts", postRouter);

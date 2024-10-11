@@ -52,13 +52,24 @@ const updatePostService = (id, postToUpdate) => __awaiter(void 0, void 0, void 0
 exports.updatePostService = updatePostService;
 const deletePostService = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const myPost = yield (0, exports.getPostById)(id);
         yield postModel_1.default.deleteOne({ _id: id });
         yield userModel_1.userModel.updateOne({ posts: id }, { $pull: { posts: id } });
-        return myPost;
     }
     catch (err) {
         throw err;
     }
 });
 exports.deletePostService = deletePostService;
+// export const addCommentService = async (comment: IComment): Promise<void> => {
+//     try {
+//         const { content,author,createdAt } = comment
+//         const myUser: User | unknown = await getUserById(author)
+//         if (!myUser) throw new Error('author not found!')
+//         const dbPost = new postModel({ title, content, author })
+//         await dbPost.save()
+//         await userModel.findByIdAndUpdate(author, { $push: { posts: dbPost._id } })
+//         return await getPostById(dbPost.id)
+//     } catch (error) {
+//         throw error
+//     }
+// }

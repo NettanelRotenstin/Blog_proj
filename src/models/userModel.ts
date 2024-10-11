@@ -4,6 +4,7 @@ import  DTOPrfl from '../types/DTO/DTOProfile'
 
 export interface IUser extends Document {
   username: string;
+  password?:string;
   email: string;
   profile: {
     bio?: string;
@@ -17,12 +18,14 @@ const userSchema = new Schema<IUser>({
     type: String,
     required: [true, 'username is missing!'],
     min: [4, 'name too short!'],
-    max: [20, 'name too long!']
+    max: [20, 'name too long!'],
+    unique: true
   },
   email: {
     type: String,
     required: [true, 'email is missing!'],
-    validate: isEmail
+    validate: isEmail,
+    unique: true
   },
   profile: {
     type: DTOPrfl

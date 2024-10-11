@@ -2,11 +2,132 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const postController_1 = require("../controllers/postController");
+const authMW_1 = require("../middleware/authMW");
 const postRouter = (0, express_1.Router)();
-postRouter.post("/", postController_1.createPost);
-postRouter.get("/", postController_1.getPosts);
-postRouter.get("/:id", postController_1.getPost);
-postRouter.put("/:id", postController_1.updatePost);
-postRouter.delete("/:id", postController_1.deletePost);
-postRouter.post("/:id/comments", postController_1.addComment);
+/**
+ * @swagger
+ * /:
+ *   post:
+ *     summary: create post.
+ *     description: create post.
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/src/routes/postRoutes'
+ *
+ *     responses:
+ *       '201':
+ *         description: A successful response
+ *       '404':
+ *         description: Employee not found
+ *       '500':
+ *         description: Internal server error
+ */
+postRouter.post("/", authMW_1.onlySignUser, postController_1.createPost);
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     summary: get all posts.
+ *     description: get all posts.
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/src/routes/postRoutes'
+ *
+ *     responses:
+ *       '200':
+ *         description: A successful response
+ *       '404':
+ *         description: Employee not found
+ *       '500':
+ *         description: Internal server error
+ */
+postRouter.get("/", authMW_1.onlySignUser, postController_1.getPosts);
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     summary: get post.
+ *     description: get post.
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/src/routes/postRoutes'
+ *
+ *     responses:
+ *       '200':
+ *         description: A successful response
+ *       '404':
+ *         description: Employee not found
+ *       '500':
+ *         description: Internal server error
+ */
+postRouter.get("/:id", authMW_1.onlySignUser, postController_1.getPost);
+/**
+ * @swagger
+ * /:
+ *   put:
+ *     summary: update post.
+ *     description: update post.
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/src/routes/postRoutes'
+ *
+ *     responses:
+ *       '200':
+ *         description: A successful response
+ *       '404':
+ *         description: Employee not found
+ *       '500':
+ *         description: Internal server error
+ */
+postRouter.put("/:id", authMW_1.onlySignUser, postController_1.updatePost);
+/**
+ * @swagger
+ * /:
+ *   delete:
+ *     summary: delete post.
+ *     description: delete post.
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/src/routes/postRoutes'
+ *
+ *     responses:
+ *       '204':
+ *         description: A successful response
+ *       '404':
+ *         description: Employee not found
+ *       '500':
+ *         description: Internal server error
+ */
+postRouter.delete("/:id", authMW_1.onlySignUser, postController_1.deletePost);
+/**
+ * @swagger
+ * /:
+ *   post:
+ *     summary: add comment.
+ *     description: add comment.
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/src/routes/postRoutes'
+ *
+ *     responses:
+ *       '201':
+ *         description: A successful response
+ *       '404':
+ *         description: Employee not found
+ *       '500':
+ *         description: Internal server error
+ */
+postRouter.post("/:id/comments", authMW_1.onlySignUser, postController_1.addComment);
 exports.default = postRouter;

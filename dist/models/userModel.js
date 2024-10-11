@@ -35,12 +35,14 @@ const userSchema = new mongoose_1.Schema({
         type: String,
         required: [true, 'username is missing!'],
         min: [4, 'name too short!'],
-        max: [20, 'name too long!']
+        max: [20, 'name too long!'],
+        unique: true
     },
     email: {
         type: String,
         required: [true, 'email is missing!'],
-        validate: validator_1.isEmail
+        validate: validator_1.isEmail,
+        unique: true
     },
     profile: {
         type: DTOProfile_1.default
