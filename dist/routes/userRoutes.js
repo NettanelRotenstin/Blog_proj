@@ -48,7 +48,7 @@ userRouter.post("/", userController_1.createUser);
 userRouter.get("/", authMW_1.onlySignUser, userController_1.getUsers);
 /**
  * @swagger
- * /:
+ * /:username:
  *   get:
  *     summary: get user.
  *     description: get user.
@@ -56,7 +56,7 @@ userRouter.get("/", authMW_1.onlySignUser, userController_1.getUsers);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/src/routes/postRoutes'
+ *             $ref: '#/src/routes/userRoutes'
  *
  *     responses:
  *       '204':

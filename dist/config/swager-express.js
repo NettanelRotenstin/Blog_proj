@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.specs = void 0;
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const options = {
@@ -10,10 +12,10 @@ const options = {
             description: 'A simple Express API with Swagger documentation',
         },
     },
-    apis: ['src/routes/*.js'], // Path to your API routes
+    apis: ['src/routes/*.ts'], // Path to your API routes
 };
-const specs = swaggerJsdoc(options);
+exports.specs = swaggerJsdoc(options);
 module.exports = {
-    specs,
-    swaggerUi,
+    specs: exports.specs,
+    swaggerUi
 };

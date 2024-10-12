@@ -111,21 +111,28 @@ postRouter.put("/:id", authMW_1.onlySignUser, postController_1.updatePost);
 postRouter.delete("/:id", authMW_1.onlySignUser, postController_1.deletePost);
 /**
  * @swagger
- * /:
+ * /{id}/comments:
  *   post:
- *     summary: add comment.
- *     description: add comment.
+ *     summary: Add comment
+ *     description: Add a comment to a post.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the post to add the comment to
  *     requestBody:
+ *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/src/routes/postRoutes'
- *
+ *             $ref: '#/components/schemas/Comment'  # Assuming you have a schema defined for comments
  *     responses:
  *       '201':
  *         description: A successful response
  *       '404':
- *         description: Employee not found
+ *         description: Post not found
  *       '500':
  *         description: Internal server error
  */

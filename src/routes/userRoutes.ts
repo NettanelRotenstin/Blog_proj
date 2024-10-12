@@ -51,7 +51,7 @@ userRouter.get("/",onlySignUser, getUsers);
 
 /**
  * @swagger
- * /:
+ * /:username:
  *   get:
  *     summary: get user.
  *     description: get user.
@@ -59,7 +59,7 @@ userRouter.get("/",onlySignUser, getUsers);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/src/routes/postRoutes'
+ *             $ref: '#/src/routes/userRoutes'
  *      
  *     responses:
  *       '204':
