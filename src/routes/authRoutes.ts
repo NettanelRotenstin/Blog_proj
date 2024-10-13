@@ -1,5 +1,9 @@
+import { Router } from "express";
+
 const router = require("express").Router();
 const { login, logout } = require("../controllers/authController");
+
+const authRouter = Router()
  
 /**
  * @swagger
@@ -46,4 +50,6 @@ router.post("/login", login);
 
 router.delete("/logout", logout);
 
-module.exports = router;
+ 
+
+export default authRouter;
